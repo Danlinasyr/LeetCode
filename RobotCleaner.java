@@ -28,26 +28,43 @@ class Solution {
     private Set<Pair<Integer, Integer>> visited;
 
     //moving direction of the robot (effect on the current pos)
-    private int[][] d = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+    private int[][] direction = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
     /*
-        input: current visiting cell pos (i, j); robot
+        input: current visiting cell pos (x, y); robot
         
         base: ???
         update: visited cell 
     */
-    private void backTrack(int i, int j, int d, Robot robot){
-        visited.add(new Pair(i, j));
+    private void backTrack(int x, int y, int d, Robot robot){
+        visited.add(new Pair(x, y));
         robot.clean();
 
-        for()
+        for(int i = 0; i < 4; i++){
+            int newD = d + i;
+            int newX = x + direction[newD][0];
+            int newY = y + direction[newD][1];
+            if(!visited.contains(new Pair (newX, newY) && robot.move()){
+                backTrack(newX, newY, newD, robot);
+                goBack();
+            } 
+            robot.turnRight();
+        }
 
+    }
+
+    private void goBack(){
+        robot.turnLeft();
+        robot.turnLeft();
+        robot.move();
+        robot.turnLeft();
+        robot.turnLeft();
     }
 
 
     public void cleanRoom(Robot robot) {
         visited = new HashSet<>();
-        backTrack
+        backTrack(0,0,0,robot);
     }
 }
 
