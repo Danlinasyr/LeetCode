@@ -26,7 +26,7 @@ class Solution {
                 stack.pop();
                 int count = 0;
                 int k = 1;
-                while (!stack.isEmpty() && Character.isDigit(stack.peek())) {
+                while (!stack.isEmpty() && Character.isDigit(stack.peek())) {  
                     count += k * (stack.pop() - '0');
                     k *= 10;
                 }
@@ -47,3 +47,7 @@ class Solution {
         return new String(result);
     }
 }
+
+
+****** line 29, has to make sure stack is not empty 
+****** line 29, isDigit() is not equal to !isLetter() which I thought was the condition
