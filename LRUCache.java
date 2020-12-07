@@ -4,7 +4,7 @@ class LRUCache {
         int key, val;
         LinkedNode next;
 
-        public LinkedNode (int key, int val; LinkedNode next) {
+        public LinkedNode (int key, int val, LinkedNode next) {
             this.key = key;
             this.val = val;
             this.next= next;
@@ -61,7 +61,7 @@ class LRUCache {
         }
         
         LinkedNode prev = keyToPrev.get(key);
-        LinkdeNode curr = prev.next;
+        LinkedNode curr = prev.next;
         
         kick(prev);
         
@@ -72,7 +72,7 @@ class LRUCache {
         if (keyToPrev.containsKey(key)) {
             kick(keyToPrev.get(key));
             tail.val = value;
-            return
+            return;
         }
 
         pushBack(new LinkedNode(key, value, null));  // key dosen't exist, add a new node to the tail
@@ -106,5 +106,6 @@ class LRUCache {
 
 // Cache               vs         Hashtable
 // limited size                   expansible
+
 
 
