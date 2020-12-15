@@ -37,6 +37,13 @@ class Solution {
                 return true;
             }
         }
+
+        // above for loop could be reduce to 
+        /*
+        if (isMatchHelper(s, sIndex + 1, p, pIndex) || isMatchHelper(s, sIndex, p, pIndex + 1)) {
+            return true;
+        }
+        */
         
         return false;
     }
