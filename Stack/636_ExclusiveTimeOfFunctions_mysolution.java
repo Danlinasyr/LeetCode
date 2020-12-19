@@ -16,7 +16,7 @@ class Solution {
                 }
                 
                 stack.push(new int[] {id, timestamp});
-            } else {
+            } else { // “end”
                 int start = stack.pop()[1];
                 output[id] += timestamp - start + 1;
                 
