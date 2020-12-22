@@ -1,16 +1,5 @@
 class Solution {
     
-    /*
-    | (f, t)
-    
-    1. record operator
-    2. open a stack when sees a '('
-    3. push all 't' or 'false' onto stack
-    4. when sees ')', pop all and accumulate result based on operator
-
-    example: "|(&(t,f,t),!(t))"
-    */
-    
     class Pair {
         boolean res;
         int index;
@@ -51,7 +40,6 @@ class Solution {
         
         return new Pair (calculate(stack, operator), i);
     }
-    
     
  
     private boolean calculate(Stack<Boolean> stack, char operator) {

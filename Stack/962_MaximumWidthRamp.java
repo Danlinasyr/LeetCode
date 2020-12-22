@@ -1,10 +1,5 @@
 class Solution {
-    
-    /*
-    [6,0,8,2,1,5]
-     ^            
-    
-    */  
+     
     public int maxWidthRamp(int[] A) {
         
         int maxWidth = 0;

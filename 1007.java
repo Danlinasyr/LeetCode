@@ -13,7 +13,6 @@ class Solution {
         opt2: val_equalRow = A[i]
         opt3: val_equalRow = B[i]
         
-    
     HashMap<val_equalRow, count> val_equalRows
     
     if( !val_equalRows.contains(A[i] && !val_equalRows.contains(B[i]) ){
@@ -23,13 +22,7 @@ class Solution {
     
     else if (val_equalRows.contains (A[i]) && put(B[i], val_equalRows.get(B[i]+1)){
         put(A[i], val_equalRows.get(A[i]+1);
-    }
-    
-    
-    
-    
-    
-    
+    }  
     */
         
 
