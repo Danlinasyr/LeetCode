@@ -38,3 +38,38 @@ class Solution { // tc: O(max(K^2, n*logn)), sc: O(1)
         return ans;
     }
 }
+
+
+
+/*
+Approach 1: Linear Scan
+Intuition
+
+As in Smallest Range I, smaller A[i] will choose to increase their value ("go up"), and bigger A[i] will decrease their value ("go down").
+
+Algorithm
+
+We can formalize the above concept: if A[i] < A[j], we don't need to consider when A[i] goes down while A[j] goes up. This is because the interval (A[i] + K, A[j] - K) is a subset of (A[i] - K, A[j] + K) (here, (a, b) for a > b denotes (b, a) instead.)
+
+That means that it is never worse to choose (up, down) instead of (down, up). We can prove this claim that one interval is a subset of another, by showing both A[i] + K and A[j] - K are between A[i] - K and A[j] + K.
+
+For sorted A, say A[i] is the largest i that goes up. Then A[0] + K, A[i] + K, A[i+1] - K, A[A.length - 1] - K are the only relevant values for calculating the answer: every other value is between one of these extremal values.
+
+*/
+
+class Solution {
+    public int smallestRangeII(int[] A, int K) {
+        int n = A.length;
+        Arrays.sort(A);
+        int ans = A[n-1] - A[0];
+        
+        for (int i = 0; i < n - 1; i++) {
+            int a = A[i], b = A[i+1];
+            int high = Math.max(A[n-1] - K, a + K);
+            int low = Math.min(A[0] + K, b - K);
+            ans = Math.min(ans, high - low);
+        }
+        
+        return ans;
+    }
+}
