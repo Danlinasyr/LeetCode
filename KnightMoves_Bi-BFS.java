@@ -1,6 +1,6 @@
 
 // Bi-direction BFS. but it is only 5%
-//1419 ms   70 MB 
+//1419 ms   70 MB  very slow WHY????
 class Solution {
     private final static int[][] directions = new int[][] {{-2, 1}, {-1, 2}, {1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}};
     

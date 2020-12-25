@@ -79,10 +79,9 @@ class Solution {
             // [1,2,3]
     
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> results = new ArrayList<>();
         
         if (nums == null) {
-            return results;
+            return new ArrayList();
         }
         
         Arrays.sort(nums);
@@ -93,20 +92,17 @@ class Solution {
         queue.add(new ArrayList<Integer>());        
         while (index < queue.size()) {  // thus index is not beyond the size of the queue.
             List<Integer> subset = queue.get(index++);
-            // System.out.println(subset);
-            // System.out.println();
-            results.add(subset);
             
             for (int i = 0; i < nums.length; i++) {
-                if (subset.size() == 0 || subset.get(subset.size() - 1) < nums[i]) {
-                    List<Integer> nextSubset = new ArrayList<Integer>(subset);
+                if (subset.size() != 0 || subset.get(subset.size() - 1) < nums[i]) {
+                    List<Integer> nextSubset = new ArrayList<>(subset);
                     nextSubset.add(nums[i]);
                     queue.add(nextSubset);
                 }
             }
         }
         
-        return results;
+        return queue;
     }
 }
 
@@ -133,7 +129,7 @@ class Solution {
         for (int num : nums) {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
-                List<Integer> subset = new ArrayList<Integer>(queue.get(i));
+                List<Integer> subset = new ArrayList<Integer>(queue.get(i)); // a new subset to add the new num
                 subset.add(num);
                 queue.add(subset);
             }
