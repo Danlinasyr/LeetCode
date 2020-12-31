@@ -1,30 +1,42 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums.length == 1) {
-            return new int[] {nums[0]};
-        }
         
-        int[] res = new int[nums.length - k + 1];
-        Deque<Integer> deq = new ArrayDeque<>();
-        int j = 0;
+        Deque<Integer> deque = new ArrayDeque<Integer>();
+        int[] ans = new int[nums.length - k + 1];
+        
+        //one pass sliding window, keep a mono queue for storing the index of potential max
+        // 1. keep size of queue == k (pop_front)
+        // 2. keep queue non-increasing order in term of value of the index(pop_back)
+        
         for (int i = 0; i < nums.length; i++) {
-            if (!deq.isEmpty() && deq.peek() < i - k + 1) {
-                deq.poll();
+            if (!deque.isEmpty() && deque.peek() + k <= i) {
+                deque.poll();
             }
             
-            while (!deq.isEmpty() && nums[deq.peekLast()] < nums[i]) {
-                deq.pollLast();
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]) {
+                deque.pollLast();
             }
-            
-            deq.offer(i);
+            // keep the index because we need to check if index at the the front/top
+            // of queue is out to date (need to toss of the sliding window)
+            deque.offer(i);
             
             if (i >= k - 1) {
-                res[j++] = nums[deq.peek()];
+                ans[i - k + 1] = nums[deque.peek()];
             }
-
         }
         
-
-        return res;
+        return ans;
     }
 }
+
+// Window position               Deque/Queue
+// ---------------               -----
+// [1] 3 -1  -3  5  3  6  7       [1]
+// [1  3]-1  -3  5  3  6  7       [3]
+// [1  3 -1] -3  5  3  6  7       [3, -1]            i = 2 = k - 1 = 3 - 1
+// 1  [3 -1  -3] 5  3  6  7       [3, -1, -3] 
+// 1   3[-1  -3  5] 3  6  7       [5] 
+// 1   3 -1 [-3  5  3] 6  7       [5, 3] 
+// 1   3 -1  -3 [5  3  6] 7       [6]
+// 1   3 -1  -3  5 [3  6  7]      [7]
+
