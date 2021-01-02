@@ -40,11 +40,57 @@ class MinStack {
     }
 }
 
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
- */
+// This is the LeetCode version for the min stack problem. The https://leetcode.com/problems/min-stack/
+// The only difference I see is that its pop method doesn't need a return value;
+
+// My pop method solution1 lead to this test case failure, but if change to solution2 it passes.
+
+// Input : 
+// ["MinStack","push","push","push","push","pop","getMin","pop","getMin","pop","getMin"]
+// [[],[512],[-1024],[-1024],[512],[],[],[],[],[],[]]
+
+// My output : 
+// [null,null,null,null,null,null,-1024,null,-1024,null,-1024]
+
+// Expected output : [null,null,null,null,null,null,-1024,null,-1024,null,512]
+
+class MinStack {
+
+    /** initialize your data structure here. */
+    private Stack<Integer> stack;
+    private Stack<Integer> minStack;
+    public MinStack() {
+        stack = new Stack<>();
+        minStack = new Stack<>();
+    }
+    
+    public void push(int x) {
+        stack.push(x);
+        if (minStack.isEmpty() || x <= minStack.peek()) {
+            minStack.push(x);
+        }
+    }
+    
+    // Solution 1
+    public void pop() {
+        if (stack.pop() == minStack.peek()) {
+            minStack.pop();
+        }
+    }
+
+    // Solution 2
+    // public void pop() {
+    //     int num = stack.pop();
+    //     if (num == minStack.peek()) {
+    //         minStack.pop();
+    //     }
+    // }
+    
+    public int top() {
+        return stack.peek();
+    }
+    
+    public int getMin() {
+        return minStack.peek();
+    }
+}
