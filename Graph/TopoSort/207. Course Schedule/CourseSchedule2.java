@@ -1,12 +1,10 @@
 class Solution {
-    
     /*
     courses are vertices and prerequisiste relations are the directional edge from pre-course -> course 
     1. Transfer problem into graph decribed above
     2. Top sort and count the courses completed
         * need indegree, adjatient list (outgoing edges)
     */
-    
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (numCourses == 0) return true;
         if (prerequisites == null || prerequisites.length == 0) return true;
@@ -34,7 +32,6 @@ class Solution {
                 queue.offer(i);
             }
         }
-        
         //Top sort
         int count = 0;
         while (!queue.isEmpty()) {

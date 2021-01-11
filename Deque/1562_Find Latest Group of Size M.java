@@ -8,21 +8,16 @@ class Solution {
         day[i-1] and day[j+1] of the sliding window are larger/later than day[x]
         4. record the min(day[i-1], day[j-1]) - 1 of each valid sliding window
         5. return max of the record
-        
         * use sliding window with deque (mono quue) technique to keep a the dynamic max of the sliding window
         */
-        
         int n = arr.length;
-        
         if (n == m) {
             return n;
         }
-        
         int[] day = new int[n];  // day range from 0 to n-1
         for (int i = 0; i < n; i++) {
             day[arr[i] - 1] = i;
         }
-        
         Deque<Integer> deq = new ArrayDeque<>();
         int latest = -1;
         for (int i = 0; i < n; i++) {
@@ -38,34 +33,20 @@ class Solution {
             
             if (i < m - 1) {
                 continue;
-            }
-                        
+            }           
             int left = Integer.MAX_VALUE;
             int right = Integer.MAX_VALUE;
             if (i - m >= 0) {
                 left = day[i-m];
             }
-            
             if (i + 1 < n) {
                 right = day[i+1];
             }
             
             if (left > t && right > t) {
                 latest = Math.max(latest, Math.min(left, right));
-            }
-            
-            
-            // if (i - m + 1 < 0 && day[i+1] > t) {
-            //    latest = Math.max(latest, day[i+1]); 
-            // } else if (i + 1 >= n && day[i-m+1] > t) {
-            //     latest = Math.max(latest, day[i-m+1]); 
-            // } else if (day[i-m+1] > t && day[i+1] > t) {
-            //     latest = Math.max(latest, Math.min(day[i-m+1], day[i+1]) - 1);
-            // }
-
-            
+            }   
         }
-        
         return latest;
     }
 }
