@@ -1,4 +1,5 @@
 class Solution {
+    private static final int[][] directions = new int[][] {{ -1, 0}, {1, 0}, {0, -1}, {0, 1}, {0, 0}};
     public int minFlips(int[][] mat) {
         int m = mat.length;
         int n = mat[0].length;
@@ -38,12 +39,13 @@ class Solution {
     }
 
     private int flip (int state, int x, int y, int m, int n) {
-        for (int i = 0; i < m; i++) {
-            state ^= (1 << i * n + y);
-        }
-
-        for (int j = 0; j < n; j++) {
-            state ^= (1 << x * n + j);
+        for (int[] dir : directions) {
+            int nx = x + dir[0];
+            int ny = y + dir[1];
+            if (nx < 0 || nx >= m || ny < 0 || ny >= n) {
+                continue;
+            }
+            state ^= (1 << (nx * n + ny));
         }
 
         return state;
