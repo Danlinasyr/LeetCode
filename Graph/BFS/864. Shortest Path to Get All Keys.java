@@ -30,7 +30,7 @@ class Solution {
 		}
 
 
-		int targetState = 1 << (distances.size() / 2) - 1;  // bit masking the state
+		int targetState = (1 << (distances.size() / 2)) - 1;  // bit masking the state
 		PriorityQueue<ANode> pq = new PriorityQueue<>((a1, a2)->(a1.d - a2.d));
 		Map<Node, Integer> finalDist = new HashMap();
 		pq.offer(new ANode(new Node('@', 0), 0));
