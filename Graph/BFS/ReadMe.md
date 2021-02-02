@@ -11,3 +11,4 @@
 	- Does NOT need to poll elements of current queue (sz = queue.size(); while(sz)). Take care of level by keep subprobelm result and optimized result with a dp array.
 	- There should be some form of dp arrays to keep track of updates
 	- There must be some conditions/onstraints that governing the enqueue and stoping the enqueue at some points so that while loop could stop
+	- Does Djikstra still need a seen/visited?
