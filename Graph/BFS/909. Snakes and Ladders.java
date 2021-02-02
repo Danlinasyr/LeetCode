@@ -3,7 +3,11 @@ class Solution {
         int n = board.length;
         int dest = n * n;
         Queue<Integer> queue = new ArrayDeque<>();
+<<<<<<< HEAD
         int[] visited = new int[n*n + 1];
+=======
+        int[] visited = new int[n * n + 1];
+>>>>>>> 8e296013bed7831c3c5eaa057823da0b6387dd95
         queue.offer(1);
         visited[1] = 1;
         int moves = 0;
@@ -21,6 +25,7 @@ class Solution {
                     int rem = (s - 1) % n;
                     int r = (n - 1) - div;   //5 - (25 - 1) / 6 = 1;
                     int c = div % 2 == 1 ? n - 1 - rem : rem;   //(25 - 1) % 6 = 0
+<<<<<<< HEAD
                     
                     if (board[r][c] != -1) {
                         visited[s] = 1;
@@ -32,6 +37,18 @@ class Solution {
                         visited[s] = 1;
                     } 
                     
+=======
+
+                    if (board[r][c] != -1) {
+                        s = board[r][c];
+                    }
+
+                    if (visited[s] == 0) {
+                        queue.offer(s);
+                        visited[s] = 1;
+                    }
+
+>>>>>>> 8e296013bed7831c3c5eaa057823da0b6387dd95
                 }
             }
             moves++;
