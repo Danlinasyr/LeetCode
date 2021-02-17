@@ -1,3 +1,33 @@
+// Algo : Combination DFS
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i <= n; i++) {
+            dfs(i, nums, 0, new ArrayList<>(), res);
+        }
+        return res;
+    }
+
+    private void dfs(int n,
+                     int[] nums,
+                     int index,
+                     List<Integer> subset,
+                     List<List<Integer>> res) {
+        if (subset.size() == n) {
+            res.add(new ArrayList<>(subset));
+            return;
+        }
+
+        for (int i = index; i < nums.length; i++) {
+            subset.add(nums[i]);
+            dfs(n, nums, i + 1, subset, res);
+            subset.remove(subset.size() - 1);
+        }
+
+    }
+}
+
 
 // Algo: bit masking
 
@@ -5,7 +35,7 @@
 // 000 => 0     []
 // 001 => 1     [1]
 // 010 => 2     [2]
-// 011 => 3     [1,2]   
+// 011 => 3     [1,2]
 // 100 => 4     [3]
 // 101 => 5     [1,3]
 // 110 => 6     [2,3]
@@ -16,7 +46,7 @@ class Solution {
         List<List<Integer>> res = new ArrayList<>();
         int n = nums.length;
         // << shift left   1 << n means, 2^n
-        for (int i = 0; i < (1<<n); i++) {
+        for (int i = 0; i < (1 << n); i++) {
             List<Integer> subset = new ArrayList<>();
             for (int j = 0; j < n; j++) {
                 if ((i & (1 << j)) != 0) {
@@ -31,31 +61,31 @@ class Solution {
 
 // Algo: BFS
 class Solution {
-    
-            //                 []
-            //     [1],       [2]       [3]
-            //    [1,2][1,3] [2,3] 
-            // [1,2,3]
-    
+
+    //                 []
+    //     [1],       [2]       [3]
+    //    [1,2][1,3] [2,3]
+    // [1,2,3]
+
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> results = new LinkedList<>();
-        
+
         if (nums == null) {
             return results;
         }
-        
+
         Arrays.sort(nums);
-        
-        // BFS 
+
+        // BFS
         Queue<List<Integer>> queue = new LinkedList<>();
         queue.offer(new ArrayList<Integer>());
-        
+
         while (!queue.isEmpty()) {
             List<Integer> subset = queue.poll();
             // System.out.println(subset);
             // System.out.println();
             results.add(subset);
-            
+
             for (int i = 0; i < nums.length; i++) {
                 if (subset.size() == 0 || subset.get(subset.size() - 1) < nums[i]) {
                     List<Integer> nextSubset = new ArrayList<Integer>(subset);
@@ -64,7 +94,7 @@ class Solution {
                 }
             }
         }
-        
+
         return results;
     }
 }
@@ -72,27 +102,27 @@ class Solution {
 // Algo BFS, like above method but implemented Queue differently
 
 class Solution {
-    
-            //                 []
-            //     [1],       [2]       [3]
-            //    [1,2][1,3] [2,3] 
-            // [1,2,3]
-    
+
+    //                 []
+    //     [1],       [2]       [3]
+    //    [1,2][1,3] [2,3]
+    // [1,2,3]
+
     public List<List<Integer>> subsets(int[] nums) {
-        
+
         if (nums == null) {
             return new ArrayList();
         }
-        
+
         Arrays.sort(nums);
-        
-        // BFS 
+
+        // BFS
         List<List<Integer>> queue = new ArrayList<>();          // use ArrayList + a index to replace queue
         int index = 0;
-        queue.add(new ArrayList<Integer>());        
+        queue.add(new ArrayList<Integer>());
         while (index < queue.size()) {  // thus index is not beyond the size of the queue.
             List<Integer> subset = queue.get(index++);
-            
+
             for (int i = 0; i < nums.length; i++) {
                 if (subset.size() != 0 || subset.get(subset.size() - 1) < nums[i]) {
                     List<Integer> nextSubset = new ArrayList<>(subset);
@@ -101,26 +131,26 @@ class Solution {
                 }
             }
         }
-        
+
         return queue;
     }
 }
 
 // Algo BFS, a different BFS search tree, the subsets are the leaf nodes (total nodes : 2^n+1 - 1) (Note this is a Binary Tree)
 
-   //               []
-   //      []             [1]
-   //  []    [2]      [1]    [1 2]
-   // [][3] [2][23] [1][1 2] [1 2] [1 2 3]
+//               []
+//      []             [1]
+//  []    [2]      [1]    [1 2]
+// [][3] [2][23] [1][1 2] [1 2] [1 2 3]
 
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> results = new ArrayList<>();
-        
+
         if (nums == null) {
             return results;
         }
-        
+
         Arrays.sort(nums);
 
         List<List<Integer>> queue = new ArrayList<>();
