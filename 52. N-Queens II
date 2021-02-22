@@ -1,52 +1,52 @@
 class Solution {
     public int totalNQueens(int n) {
-        
-        //observing that on same diagonal, row + col = const for hill and row - col = const 
+
+        //observing that on same diagonal, row + col = const for hill and row - col = const
         //initialize hashset to keep track which hill diagonal and dale diagonal are potential attack-zone
         Set<Integer> hills = new HashSet<>();
         Set<Integer> dales = new HashSet<>();
         Set<Integer> cols = new HashSet<>();
         return backTrack(0, n, hills, dales, cols, 0);
-        
+
     }
-    
+
     /*
         input: rowIndex, queen_left, attack-free zone, solution count
         output: final count of solutions
-        
+
         base: queen == 0 return count;
-        
+
         iterate through each column:
             #1 check if the [row, col] is in attack-free zone
             #2 add queen at [row, col] and update attack-free zone
-            #3 call backtrack(row+1, n - 1)    
+            #3 call backtrack(row+1, n - 1)
             #4 remove the queen and update attach-free zone
-    
+
     */
-    
-    private int backTrack(int i, int n, Set<Integer>  hills, Set<Integer> dales, Set<Integer> cols, int count){
-        
-        
-        for(int j = 0; j < n; j++){
-            
-            if(!hills.contains(i+j) && !dales.contains(i-j) && !cols.contains(j)){
-                
-                if(i == n - 1){
+
+    private int backTrack(int i, int n, Set<Integer>  hills, Set<Integer> dales, Set<Integer> cols, int count) {
+
+
+        for (int j = 0; j < n; j++) {
+
+            if (!hills.contains(i + j) && !dales.contains(i - j) && !cols.contains(j)) {
+
+                if (i == n - 1) {
                     count++;
-                }else{
+                } else {
                     // update attack-zone
-                    hills.add(i+j);
-                    dales.add(i-j);
+                    hills.add(i + j);
+                    dales.add(i - j);
                     cols.add(j);
-                    count = backTrack(i+1, n, hills, dales, cols, count); 
-                    hills.remove(i+j);
-                    dales.remove(i-j);
+                    count = backTrack(i + 1, n, hills, dales, cols, count);
+                    hills.remove(i + j);
+                    dales.remove(i - j);
                     cols.remove(j);
-                } 
-            }    
-            
+                }
+            }
+
         }
-        
+
         return count;
     }
 }
